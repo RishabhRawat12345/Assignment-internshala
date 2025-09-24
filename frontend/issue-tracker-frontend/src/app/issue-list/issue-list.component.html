@@ -1,0 +1,33 @@
+<div>
+  <input [(ngModel)]="search" (input)="onSearchChange()" placeholder="Search title" />
+  <button (click)="createIssue()">Create Issue</button>
+</div>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Assignee</th>
+      <th>UpdatedAt</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let issue of issues" (click)="selectIssue(issue)">
+      <td>{{issue.id}}</td>
+      <td>{{issue.title}}</td>
+      <td>{{issue.status}}</td>
+      <td>{{issue.priority}}</td>
+      <td>{{issue.assignee}}</td>
+      <td>{{issue.updatedAt}}</td>
+      <td><button (click)="editIssue(issue); $event.stopPropagation()">Edit</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="selectedIssue">
+  <app-issue-detail [issue]="selectedIssue"></app-issue-detail>
+</div>
